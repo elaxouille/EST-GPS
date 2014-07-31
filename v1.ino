@@ -19,6 +19,7 @@ GPMS_Application.pde	Date: 23/5/10	Version: 1.01
 
 */
 
+
 #include <Wire.h>
 
 #define GPM 0x68  	                              // GPM I2C Address
@@ -28,13 +29,14 @@ byte Data;                                            // Global variable
 
 void setup()
 {
-
+  delay(6000);
+  Serial.println("Demarrage ARDUINO");
   Wire.begin();                                       // Start I2C comms
   Serial.begin(9600);                                 // Start PC serial port @ 9600 baud
   delay(100);
-  Serial.println("Application started...awaiting GPS data..");
-
-  delay(3000);                                        // Wait 3 seconds for DS-GPM.S to initialise
+  Serial.println("Demarrage MODULE-GPS");
+  Serial.println("Sommeil");
+  delay(6000);                                        // Wait 3 seconds for DS-GPM.S to initialise
 
 }
 
@@ -42,63 +44,65 @@ void loop(){
 
 for(int x=0; x <=2; x++){
 
-  Serial.print("Time: ");
+//  Serial.print("Time: ");
   Address = 0;                                        // Point to Hours register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
-  Serial.print(":");
+//  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print(":");
   Address = 2;                                        // Point to Minutes register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
-  Serial.print(":");
+//  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print(":");
   Address = 4;                                        // Point to Seconds register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.println(Data, DEC);                          // and print to PC
+//  Serial.println(Data, DEC);                          // and print to PC
 
-  Serial.print("Date: ");
+//  Serial.print("Date: ");
   Address = 6;                                        // Point to Day register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
-  Serial.print("/");
+//  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print("/");
   Address = 8;                                        // Point to Month register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
-  Serial.print("/");
+//  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print("/");
   Address = 10;                                       // Point to Year 1 register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print(Data, DEC);                            // and print to PC
   Address = 12;                                       // Point to Year 2 register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.println(Data, DEC);                          // and print to PC
+//  Serial.println(Data, DEC);                          // and print to PC
   delay(1000);                                        // Wait a second
   }
 
-  Serial.print("Heading: ");
+//  Serial.print("Heading: ");
   Address = 44;                                       // Point to Heading 1 register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print(Data, DEC);                            // and print to PC
   Address = 46;                                       // Point to Heading 2 register
   Data = GetSingle();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
-  Serial.print(".");
+//  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print(".");
   Address = 47;                                       // Point to Heading 3 register
   Data = GetSingle();                                 // Read registers from GPM
-  Serial.println(Data, DEC);                          // and print to PC
+//  Serial.println(Data, DEC);                          // and print to PC
 
-  Serial.print("Speed: ");
+//  Serial.print("Speed: ");
   Address = 52;                                       // Point to Speed 1 register
   Data = GetDouble();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print(Data, DEC);                            // and print to PC
   Address = 54;                                       // Point to Speed 2 register
   Data = GetSingle();                                 // Read registers from GPM
-  Serial.print(Data, DEC);                            // and print to PC
-  Serial.print(".");
+//  Serial.print(Data, DEC);                            // and print to PC
+//  Serial.print(".");
   Address = 55;                                       // Point to Speed 3 register
   Data = GetSingle();                                 // Read registers from GPM
-  Serial.println(Data, DEC);                          // and print to PC
+//  Serial.println(Data, DEC);                          // and print to PC
 
-  delay(3000);                                        // Wait 3 seconds
-
+  delay(3000);                 // Wait 3 seconds
+  Serial.println("");
+  Serial.println("[!]\tATTENTION PATATE\t[!]");
+  Serial.println("");
   Serial.print("Latitude: ");
   Address = 14;                                       // Point to Latitude 1 register
   Data = GetSingle();                                 // Read registers from GPM
@@ -163,7 +167,7 @@ for(int x=0; x <=2; x++){
   Address = 32;                                       // Point to Longitude character register
   Data = GetSingle();                                 // Read registers from GPM
   Serial.println(Data);                               // and print to PC
-
+  Serial.println("");                                 // Saut de ligne
   delay(3000);                                        // Wait 3 seconds
 
 }
